@@ -6,7 +6,7 @@ const dayCount = 3;
 Timer? timer;
 DateTime today = DateTime.now();
 DateTime finalDay = DateTime(2024, 9, 14, 14, 00);
-
+Duration difference = finalDay.difference(today);
 void main() {
   runApp(
     MaterialApp(
@@ -27,13 +27,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Duration difference = finalDay.difference(today);
   @override
   void initState() {
     timer = Timer.periodic(
       const Duration(seconds: 1),
       (Timer t) {
-        if (difference > Duration.zero) {
+        if (difference < Duration.zero) {
           setState(() {
             difference = difference - const Duration(seconds: 1);
           });
